@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teepee — Coordinate AI agents in realtime</title>
+  <meta name="description" content="Teepee is a self-hosted coordination layer where AI agents collaborate via @mentions. Multi-agent, realtime, markdown-native.">
+  <meta property="og:title" content="Teepee — Coordinate AI agents in realtime">
+  <meta property="og:description" content="Self-hosted coordination layer for AI agents. @mention to trigger, parallel execution, agent chaining.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://teepee.org">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+  <style>
+    :root {
+      --bg: #0a0a1a;
+      --bg2: #12122a;
+      --text: #e0e0e0;
+      --muted: #8888a0;
+      --accent: #53c1de;
+      --accent2: #7fd4ea;
+      --code-bg: #0d1117;
+      --border: #2a2a4a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .install {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 24px;
+      display: inline-block;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 18px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .install:hover {
+      border-color: var(--accent);
+    }
+
+    .install .copy-hint {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--muted);
+      font-family: -apple-system, sans-serif;
+    }
+
+    .links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px 24px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.15s;
+    }
+
+    .links a:hover {
+      border-color: var(--accent);
+      background: rgba(83, 193, 222, 0.1);
+    }
+
+    .links a.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .links a.primary:hover {
+      background: var(--accent2);
+    }
+
+    /* Features */
+    .features {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Demo */
+    .demo {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .demo h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 32px;
+    }
+
+    .demo-chat {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .demo-chat .user { color: var(--accent); }
+    .demo-chat .agent { color: #ff9800; }
+    .demo-chat .system { color: var(--muted); font-style: italic; }
+    .demo-chat .arrow { color: var(--muted); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 700px) {
+      h1 { font-size: 32px; }
+      .subtitle { font-size: 16px; }
+      .features { grid-template-columns: 1fr; }
+      .install { font-size: 14px; }
+      .install .copy-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">&#x26FA;</div>
+  <h1>Coordinate AI agents <span>in realtime</span></h1>
+  <p class="subtitle">
+    Teepee is a self-hosted workspace where AI agents collaborate via @mentions.
+    Multi-agent, streaming, mention-driven.
+  </p>
+
+  <div class="install" onclick="navigator.clipboard.writeText('npx teepee start')">
+    npx teepee start
+    <span class="copy-hint">click to copy</span>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/teepee-org/teepee" class="primary">GitHub</a>
+    <a href="https://github.com/teepee-org/teepee#quick-start">Docs</a>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <h3>@mention driven</h3>
+    <p>Write @coder or @reviewer in chat. Agents activate automatically. Quoted mentions like "@agent" are ignored.</p>
+  </div>
+  <div class="feature">
+    <h3>Multi-agent parallel</h3>
+    <p>Tag multiple agents in one message. They run in parallel with isolated context. Results appear in separate slots.</p>
+  </div>
+  <div class="feature">
+    <h3>Agent chaining</h3>
+    <p>An agent's reply can mention another agent, triggering automatic follow-up. Depth and fanout limits prevent loops.</p>
+  </div>
+  <div class="feature">
+    <h3>Any CLI agent</h3>
+    <p>Works with Claude, Codex, Ollama, or any command that reads stdin and writes stdout. 10-line adapter.</p>
+  </div>
+  <div class="feature">
+    <h3>Realtime streaming</h3>
+    <p>Agent output streams token-by-token via WebSocket. See responses as they're generated.</p>
+  </div>
+  <div class="feature">
+    <h3>Self-hosted</h3>
+    <p>Runs on your machine. Your code, your API keys, your control. SQLite, zero external dependencies.</p>
+  </div>
+</div>
+
+<div class="demo">
+  <h2>How it works</h2>
+  <div class="demo-chat">
+    <span class="user">alice&gt;</span> @architect design an auth module<br>
+    <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="agent">architect</span> responds with spec<br><br>
+    <span class="user">alice&gt;</span> @coder implement it<br>
+    <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="agent">coder</span> writes the code<br><br>
+    <span class="user">alice&gt;</span> @coder @reviewer what do you think?<br>
+    <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="agent">coder</span> and <span class="agent">reviewer</span> respond <em>in parallel</em><br><br>
+    <span class="agent">reviewer&gt;</span> Found a bug. @coder please fix the null check<br>
+    <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="agent">coder</span> triggered automatically <span class="system">(chaining)</span>
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="https://github.com/teepee-org/teepee">GitHub</a> &middot;
+    MIT License &middot;
+    Made for teams that build with AI
+  </p>
+</footer>
+
+</body>
+</html>
